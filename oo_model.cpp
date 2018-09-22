@@ -15,9 +15,11 @@ Bola::Bola(float velocidadeX, float velocidadeY, float posicaoX, float posicaoY)
   this->posicaoY = posicaoY;
 }
 
-void Bola::update(float new_posX, float new_posY) { 
+void Bola::update(float new_posX, float new_posY, float new_velX, float new_velY) { 
   this->posicaoX = new_posX;
   this->posicaoY = new_posY;
+  this->velocidadeX = new_velX;
+  this->velocidadeY = new_velY;
 }
 
 float Bola::get_velocidadeX() {
@@ -44,27 +46,33 @@ void particulaBarra::update(float nova_posicao){
   this->posicao = nova_posicao;
 }
 
-Fisica::Fisica(Bola bola) {
+Fisica::Fisica(Bola *bola) {
   this->bola = bola;
 }
 
 
 void Fisica::update(float deltaT) {
+
+  Bola *updateBola = this->bola;
   
-  Bola updateBola = this->bola;
-  float new_posX = updateBola->get_posicaoX() + updateBola->get_velocidadeX()*deltaT/1000;
-  float new_posY = updateBola>get_posicao() + updateBola->get_velocidadeY()*deltaT/1000;
-  updateBola->update(new_posX, new_posY);
+  float new_velX = updateBola->get_velocidadeX();
+  float new_velY = updateBola->get_velocidadeY();
+
+  if(updateBola->get_posicaoY() > SCREEN_WIDTH - 2 || updateBola->get_posicaoY()  < 2){
+  	new_velY = (-1)*updateBola->get_velocidadeY();
+  }
+
+  if(updateBola->get_posicaoX() > SCREEN_HEIGHT || updateBola->get_posicaoX() < 2){
+  	new_velX = (-1)*updateBola->get_velocidadeX();
+  }
+
+  float new_posX = updateBola->get_posicaoX() + new_velX*deltaT/1000;
+  float new_posY = updateBola->get_posicaoY() + new_velY*deltaT/1000;
+  
+  updateBola->update(new_posX, new_posY, new_velX, new_velY);
 }
 
 void Fisica::choque(float velocidade) {
   // Atualiza parametros dos corpos!
-  std::vector<Corpo *> *c = this->lista->get_corpos();
-  for (int i = 0; i < (*c).size(); i++) {
-    float new_vel = velocidade;
-    float new_pos = (*c)[i]->get_posicao();
-    float new_acc = (-((*c)[i]->get_constante_mola()*((*c)[i]->get_posicao() - (*c)[i]->get_posicao_equilibrio())) 
-                    - (*c)[i]->get_constante_amortecimento() * (*c)[i]->get_velocidade()) /(*c)[i]->get_massa();
-    (*c)[i]->update(new_vel, new_pos, new_acc);
-  }
+  
 }

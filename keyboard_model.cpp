@@ -23,7 +23,7 @@ class Teclado {
 }
 
 */
-
+			
 void threadfun (char *keybuffer, int *control)
 {
   char c;

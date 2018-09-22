@@ -8,7 +8,7 @@
 
 using namespace std::chrono;
 
-Tela::Tela(Bola bola, int maxI, int maxJ, float maxX, float maxY) {
+Tela::Tela(Bola *bola, int maxI, int maxJ, float maxX, float maxY) {
   this->atualBola = bola;
   this->anteriorBola = new Bola(bola->get_velocidadeX(),\
                                 bola->get_velocidadeY(),\
@@ -22,7 +22,7 @@ Tela::Tela(Bola bola, int maxI, int maxJ, float maxX, float maxY) {
 
 void Tela::init() {
   initscr();			      	 /* Start curses mode 		*/
-	raw();				           /* Line buffering disabled	*/
+  raw();				           /* Line buffering disabled	*/
   curs_set(0);           	 /* Do not display cursor */
   erase();
 }
@@ -51,7 +51,7 @@ void Tela::update() {
         (this->maxJ / this->maxY);
     
     if(i > 0 && i <= this->maxY){
-      move(i, k);                 /* Move cursor to position */
+      move(i, j);                 /* Move cursor to position */
       echochar(' ');              /* Prints character, advances a position */
     }
   
@@ -64,14 +64,12 @@ void Tela::update() {
         (this->maxJ / this->maxY);
     
     if(i > 0 && i <= this->maxY){
-      move(i, k);   /* Move cursor to position */
+      move(i, j);   /* Move cursor to position */
       echochar('*');  /* Prints character, advances a position */
     }
 
     // Atualiza corpos antigos
-    anteriorBola->update(atualBola->get_velocidadeX(), atualBola->get_velocidadeY(),
-                         atualBola->get_posicaoX(), atualBola->get_velocidadeY());
-  
+    anteriorBola->update(atualBola->get_posicaoX(), atualBola->get_posicaoY(), atualBola->get_velocidadeX(), atualBola->get_velocidadeY());
 
   // Atualiza tela
   refresh();

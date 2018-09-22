@@ -4,6 +4,9 @@
 
 #include <thread>
 
+#define SCREEN_WIDTH 70
+#define SCREEN_HEIGHT 20
+
 class Bola {
   private:
     float velocidadeX;
@@ -13,8 +16,7 @@ class Bola {
 
   public:
     Bola(float velocidadeX, float velocidadeY, float posicaoX, float posicaoY);
-    void update(float new_posX, float new_posY);
-    void updateDifficult(float new_velX, float new_velY);
+    void update(float new_posX, float new_posY, float new_velX, float new_velY);
     float get_velocidadeX();
     float get_velocidadeY();
     float get_posicaoX();
@@ -31,26 +33,26 @@ class particulaBarra {
     void update(float nova_posicao);
     float get_posicao();
     float get_char();
-} 
+};
 
 class Fisica {
   private:
-    Bola bola;
+    Bola *bola;
 
   public:
-    Fisica(Bola bola);
+    Fisica(Bola *bola);
     void choque(float velocidade);
     void update(float deltaT);
 };
 
 class Tela {
   private:
-    Bola atualBola, anteriorBola;
+    Bola *atualBola, *anteriorBola;
     int maxI, maxJ;
     float maxX, maxY;
 
   public:
-    Tela(Bola bola, int maxI, int maxJ, float maxX, float maxY);
+    Tela(Bola *bola, int maxI, int maxJ, float maxX, float maxY);
     ~Tela();
     void stop();
     void init();

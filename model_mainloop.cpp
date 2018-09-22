@@ -23,14 +23,11 @@ uint64_t get_now_ms() {
 int main ()
 {
 
-  std::vector<particulaBarra> Barra;
-  Barra.resize(9);
-
-  
-  Fisica *f = new Fisica(l);
+  Bola *bola = new Bola(12 , 12, (int)(SCREEN_HEIGHT/2), (int)(SCREEN_WIDTH/2));
+  Fisica *f = new Fisica(bola);
 
   //Tela
-  Tela *tela = new Tela(l, 20, 70, 20, 70);
+  Tela *tela = new Tela(bola, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH);
   tela->init();
   tela->draw();
 
@@ -46,7 +43,7 @@ int main ()
   Audio::Sample *asample_beep2;
   asample_beep2 = new Audio::Sample();
   asample_beep2->load("assets/beep-02.dat");
-
+  
   Audio::Sample *asample_beep3;
   asample_beep3= new Audio::Sample();
   asample_beep3->load("assets/beep-03.dat");
@@ -93,7 +90,7 @@ int main ()
       break;
     } 
 
-    std::this_thread::sleep_for (std::chrono::milliseconds(100));
+    std::this_thread::sleep_for (std::chrono::milliseconds(50));
     i++;
   }
   tela->stop();
