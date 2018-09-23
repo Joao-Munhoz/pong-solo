@@ -37,19 +37,21 @@ float Bola::get_posicaoY() {
   return this->posicaoY;
 }
 
-particulaBarra::particulaBarra(float posicao) {
+particulaBarra::particulaBarra(int posicao) {
   this->posicao = posicao;
   this->iconeBarra = '_';
 }
 
-void particulaBarra::update(float nova_posicao){
-  this->posicao = nova_posicao;
+int particulaBarra::get_posicao(){
+	return this->posicao;
+}
+void particulaBarra::update(int posicao){
+  this->posicao = posicao;
 }
 
 Fisica::Fisica(Bola *bola) {
   this->bola = bola;
 }
-
 
 void Fisica::update(float deltaT) {
 

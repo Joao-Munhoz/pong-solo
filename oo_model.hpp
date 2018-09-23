@@ -6,6 +6,7 @@
 
 #define SCREEN_WIDTH 70
 #define SCREEN_HEIGHT 20
+#define SIZE_BARRA 5
 
 class Bola {
   private:
@@ -25,14 +26,14 @@ class Bola {
 
 class particulaBarra {
   private:
-    float posicao;
+    int posicao;
     char iconeBarra;
 
   public:
-    particulaBarra(float posicao);
-    void update(float nova_posicao);
-    float get_posicao();
-    float get_char();
+    particulaBarra(int posicao);
+    void update(int nova_posicao);
+    int get_posicao();
+    char get_char();
 };
 
 class Fisica {
@@ -43,16 +44,19 @@ class Fisica {
     Fisica(Bola *bola);
     void choque(float velocidade);
     void update(float deltaT);
+    int get_posicao();
 };
 
 class Tela {
   private:
     Bola *atualBola, *anteriorBola;
+    std::vector<particulaBarra*> atualBarra;
+    std::vector<particulaBarra*> anteriorBarra;
     int maxI, maxJ;
     float maxX, maxY;
 
   public:
-    Tela(Bola *bola, int maxI, int maxJ, float maxX, float maxY);
+    Tela(Bola *bola, std::vector<particulaBarra*>& barra, int maxI, int maxJ, float maxX, float maxY);
     ~Tela();
     void stop();
     void init();

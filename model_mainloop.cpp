@@ -22,12 +22,22 @@ uint64_t get_now_ms() {
 
 int main ()
 {
+	//Barra
+	int position = (int)(SCREEN_WIDTH/2) - SIZE_BARRA;
+	int inst_pos;
 
+	std::vector<particulaBarra*> barra;
+	for (int i = -(SIZE_BARRA); i <= SIZE_BARRA; ++i){
+		barra.push_back(new particulaBarra(position));
+		position++;
+	}
+
+	//Bola e deslocamento
   Bola *bola = new Bola(12 , 12, (int)(SCREEN_HEIGHT/2), (int)(SCREEN_WIDTH/2));
   Fisica *f = new Fisica(bola);
 
   //Tela
-  Tela *tela = new Tela(bola, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH);
+  Tela *tela = new Tela(bola, barra, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH);
   tela->init();
   tela->draw();
 
@@ -72,16 +82,23 @@ int main ()
 
     // Lê o teclado
     char c = teclado->getchar();
-    if (c== 'w') {
+    if (c == 'a') {
       player->play(asample_beep1);
-      f->choque(-5);
       asample_beep1->set_position(0);
+     	for (int i = 0; barra.size(); ++i){
+     		inst_pos = barra[i]->get_posicao() - 1;
+     		barra[i]->update(inst_pos);	
+     	}
     }
 
-    if(c == 's'){
+    if(c == 'd'){
       player->play(asample_beep2);
       f->choque(5);
       asample_beep2->set_position(0);
+      for (int i = 0; barra.size(); ++i){
+      	inst_pos = barra[i]->get_posicao() + 1;
+     		barra[i]->update(inst_pos);	
+     	}
     }
 
     if (c=='q') {

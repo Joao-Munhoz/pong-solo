@@ -8,12 +8,14 @@
 
 using namespace std::chrono;
 
-Tela::Tela(Bola *bola, int maxI, int maxJ, float maxX, float maxY) {
+Tela::Tela(Bola *bola, std::vector<particulaBarra*>& barra, int maxI, int maxJ, float maxX, float maxY) {
   this->atualBola = bola;
   this->anteriorBola = new Bola(bola->get_velocidadeX(),\
                                 bola->get_velocidadeY(),\
                                 bola->get_posicaoX(),\
                                 bola->get_posicaoY());
+  this->atualBarra = barra;
+  this->anteriorBarra = barra;
   this->maxI = maxI;
   this->maxJ = maxJ;
   this->maxX = maxX;
@@ -54,8 +56,12 @@ void Tela::update() {
       move(i, j);                 /* Move cursor to position */
       echochar(' ');              /* Prints character, advances a position */
     }
-  
 
+    for (int i = 0; i < atualBarra.size(); ++i){
+    	move( SCREEN_HEIGHT - 1 , atualBarra[i]->get_posicao());
+    	echochar('_');
+    }
+  
     // Desenha bola na tela
     i = (int) atualBola->get_posicaoX() * \
         (this->maxI / this->maxX);
@@ -65,7 +71,7 @@ void Tela::update() {
     
     if(i > 0 && i <= this->maxY){
       move(i, j);   /* Move cursor to position */
-      echochar('*');  /* Prints character, advances a position */
+      echochar('o');  /* Prints character, advances a position */
     }
 
     // Atualiza corpos antigos
