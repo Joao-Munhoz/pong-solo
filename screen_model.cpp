@@ -8,7 +8,7 @@
 
 using namespace std::chrono;
 
-Tela::Tela(Bola *bola, std::vector<particulaBarra*>& barra, int maxI, int maxJ, float maxX, float maxY) {
+Tela::Tela(Bola *bola, ListaDeParticulas *barra, int maxI, int maxJ, float maxX, float maxY) {
   this->atualBola = bola;
   this->anteriorBola = new Bola(bola->get_velocidadeX(),\
                                 bola->get_velocidadeY(),\
@@ -46,6 +46,8 @@ void Tela::update() {
     
     int i, j;
 
+    //Apaga a barra na tela
+
     //Apaga bola da tela
     i = (int) anteriorBola->get_posicaoX() * \
         (this->maxI / this->maxX);
@@ -57,8 +59,9 @@ void Tela::update() {
       echochar(' ');              /* Prints character, advances a position */
     }
 
-    for (int i = 0; i < atualBarra.size(); ++i){
-    	move( SCREEN_HEIGHT - 1 , atualBarra[i]->get_posicao());
+    //Desenha barra na tela
+    for (int i = 0; i < (*(atualBarra->get_particulas())).size(); ++i){
+    	move( SCREEN_HEIGHT - 1 , (*(atualBarra->get_particulas()))[i]->get_posicao());
     	echochar('_');
     }
   

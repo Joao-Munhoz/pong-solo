@@ -26,9 +26,9 @@ int main ()
 	int position = (int)(SCREEN_WIDTH/2) - SIZE_BARRA;
 	int inst_pos;
 
-	std::vector<particulaBarra*> barra;
+	ListaDeParticulas *barra = new ListaDeParticulas();
 	for (int i = -(SIZE_BARRA); i <= SIZE_BARRA; ++i){
-		barra.push_back(new particulaBarra(position));
+		barra->add_particula(new particulaBarra(position));
 		position++;
 	}
 
@@ -85,9 +85,9 @@ int main ()
     if (c == 'a') {
       player->play(asample_beep1);
       asample_beep1->set_position(0);
-     	for (int i = 0; barra.size(); ++i){
-     		inst_pos = barra[i]->get_posicao() - 1;
-     		barra[i]->update(inst_pos);	
+     	for (int i = 0; i < (barra->get_particulas())->size(); ++i){
+     		inst_pos = (*(barra->get_particulas()))[i]->get_posicao() - 1;
+     		(*(barra->get_particulas()))[i]->update(inst_pos);	
      	}
     }
 
@@ -95,11 +95,12 @@ int main ()
       player->play(asample_beep2);
       f->choque(5);
       asample_beep2->set_position(0);
-      for (int i = 0; barra.size(); ++i){
-      	inst_pos = barra[i]->get_posicao() + 1;
-     		barra[i]->update(inst_pos);	
+      for (int i = 0; i < (barra->get_particulas())->size(); ++i){
+      	inst_pos = (*(barra->get_particulas()))[i]->get_posicao() + 1;
+     		(*(barra->get_particulas()))[i]->update(inst_pos);	
      	}
     }
+    	
 
     if (c=='q') {
       player->play(asample_beep3);

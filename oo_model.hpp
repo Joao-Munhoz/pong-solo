@@ -36,6 +36,17 @@ class particulaBarra {
     char get_char();
 };
 
+class ListaDeParticulas {
+ private:
+    std::vector<particulaBarra*> *particulas;
+
+  public:
+    ListaDeParticulas();
+    void hard_copy(ListaDeParticulas *ldc);
+    void add_particula(particulaBarra *c);
+    std::vector<particulaBarra*> *get_particulas();
+};
+
 class Fisica {
   private:
     Bola *bola;
@@ -50,13 +61,13 @@ class Fisica {
 class Tela {
   private:
     Bola *atualBola, *anteriorBola;
-    std::vector<particulaBarra*> atualBarra;
-    std::vector<particulaBarra*> anteriorBarra;
+   	ListaDeParticulas *atualBarra;
+    ListaDeParticulas *anteriorBarra;
     int maxI, maxJ;
     float maxX, maxY;
 
   public:
-    Tela(Bola *bola, std::vector<particulaBarra*>& barra, int maxI, int maxJ, float maxX, float maxY);
+    Tela(Bola *bola, ListaDeParticulas *barra, int maxI, int maxJ, float maxX, float maxY);
     ~Tela();
     void stop();
     void init();

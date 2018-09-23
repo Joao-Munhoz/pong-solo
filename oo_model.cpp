@@ -49,6 +49,27 @@ void particulaBarra::update(int posicao){
   this->posicao = posicao;
 }
 
+ListaDeParticulas::ListaDeParticulas() {
+  this->particulas = new std::vector<particulaBarra *>(0);
+}
+
+void ListaDeParticulas::add_particula(particulaBarra *c) {
+  (this->particulas)->push_back(c);
+}
+
+std::vector<particulaBarra*> *ListaDeParticulas::get_particulas() {
+  return (this->particulas);
+}
+
+void ListaDeParticulas::hard_copy(ListaDeParticulas *ldc) {
+  std::vector<particulaBarra *> *particulas = ldc->get_particulas();
+
+  for (int k = 0; k < particulas->size(); k++) {
+    particulaBarra *c = new particulaBarra( (*particulas)[k]->get_posicao());
+    this->add_particula(c);
+  }
+}
+
 Fisica::Fisica(Bola *bola) {
   this->bola = bola;
 }
