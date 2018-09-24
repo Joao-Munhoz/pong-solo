@@ -6,13 +6,15 @@
 Funcionamento do Jogo Pong-Solo
 
 ## Compile and Run
-'''
+```
 make test
-'''
+```
 ## General Descriptions:
+
+```
 O jogador movimenta a barra para esquerda e pra direita, afim
 de rebater a bola e mantê-la no quadrante.
-
+```
 ## Instrucitons to play:
 As letras A e S movimentam a barra para esquerda e direita
 respectivamente.
@@ -29,7 +31,7 @@ Divida em três pontos de reflexão.
 
 ## Screen Size(weight x height)
   70x20
-
+  
 ********************************************************
 *  20                                           09:41  *
 *                                                      *
