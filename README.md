@@ -1,19 +1,19 @@
 # Pong-Solo
 
-## Leonardo Rodrigues Marques - 178610
-   João Victor da Conceição Munhoz -160174
+ Leonardo Rodrigues Marques - 178610
+ João Victor da Conceição Munhoz -160174
 
 Funcionamento do Jogo Pong-Solo
 
-Descrição Geral:
+## General Descriptions:
 O jogador movimenta a barra para esquerda e pra direita, afim
 de rebater a bola e mantê-la no quadrante.
 
-Teclado:
+## Instrucitons to play:
 As letras A e S movimentam a barra para esquerda e direita
 respectivamente.
 
-Etapas e Regras:
+## Rules:
  - Cada rebatida valerá um ponto;
  - A cada 10 pontos conquistados, a velocidade da bola será
 incrementada;
@@ -23,8 +23,8 @@ incrementada;
 Barra:
 Divida em três pontos de reflexão.
 
-Tela:
- - 70x20
+## Screen Size(weight x height)
+  70x20
 
 ********************************************************
 *  20                                           09:41  *
