@@ -5,6 +5,10 @@
 
 Funcionamento do Jogo Pong-Solo
 
+## Compile and Run
+'''
+make test
+'''
 ## General Descriptions:
 O jogador movimenta a barra para esquerda e pra direita, afim
 de rebater a bola e mantê-la no quadrante.

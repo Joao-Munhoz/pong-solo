@@ -6,4 +6,5 @@ model: model_mainloop.cpp oo_model.cpp sound_model.cpp keyboard_model.cpp screen
 	g++ -omodel model_mainloop.cpp oo_model.cpp sound_model.cpp keyboard_model.cpp screen_model.cpp $(FLAGS)
 
 test: model
-	./model
+	./model 2>/dev/null
+

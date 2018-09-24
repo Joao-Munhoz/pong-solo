@@ -81,7 +81,7 @@ void Fisica::update(float deltaT) {
   float new_velX = updateBola->get_velocidadeX();
   float new_velY = updateBola->get_velocidadeY();
 
-  if(updateBola->get_posicaoY() > SCREEN_WIDTH - 2 || updateBola->get_posicaoY()  < 2){
+  if(updateBola->get_posicaoY() > SCREEN_WIDTH - 2 || updateBola->get_posicaoY() < 2){
   	new_velY = (-1)*updateBola->get_velocidadeY();
   }
 

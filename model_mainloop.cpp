@@ -1,5 +1,5 @@
 /* 
- * Atividade Pratica 04 
+ * Projeto Jogo 
  * Utima atualizacao: 07/09/2018 - 18:16
  *
  * Leonardo Rodrigues Marques - 178610
@@ -16,6 +16,7 @@
 #include "oo_model.hpp"
 
 using namespace std::chrono;
+
 uint64_t get_now_ms() {
   return duration_cast<milliseconds>(steady_clock::now().time_since_epoch()).count();
 }
@@ -85,19 +86,23 @@ int main ()
     if (c == 'a') {
       player->play(asample_beep1);
       asample_beep1->set_position(0);
-     	for (int i = 0; i < (barra->get_particulas())->size(); ++i){
-     		inst_pos = (*(barra->get_particulas()))[i]->get_posicao() - 1;
-     		(*(barra->get_particulas()))[i]->update(inst_pos);	
-     	}
+      if((*(barra->get_particulas()))[0]->get_posicao() > 1){
+	     	for (int i = 0; i < (barra->get_particulas())->size(); ++i){
+	     		inst_pos = (*(barra->get_particulas()))[i]->get_posicao() - 1;
+	     		(*(barra->get_particulas()))[i]->update(inst_pos);	
+	     	}
+	    }
     }
 
     if(c == 'd'){
       player->play(asample_beep2);
       f->choque(5);
       asample_beep2->set_position(0);
-      for (int i = 0; i < (barra->get_particulas())->size(); ++i){
-      	inst_pos = (*(barra->get_particulas()))[i]->get_posicao() + 1;
-     		(*(barra->get_particulas()))[i]->update(inst_pos);	
+      if((*(barra->get_particulas()))[0]->get_posicao() + 2*SIZE_BARRA < SCREEN_WIDTH - 2){ 
+      	for (int i = 0; i < (barra->get_particulas())->size(); ++i){
+      		inst_pos = (*(barra->get_particulas()))[i]->get_posicao() + 1;
+     			(*(barra->get_particulas()))[i]->update(inst_pos);	
+     		}
      	}
     }
     	
@@ -115,8 +120,6 @@ int main ()
   teclado->stop();
   return 0;
 }
-
-
 void wait(){
 
   uint64_t t0, t1;
