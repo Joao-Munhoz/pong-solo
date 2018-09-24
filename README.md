@@ -1,7 +1,7 @@
-#Pong-Solo
+# Pong-Solo
 
 ## Leonardo Rodrigues Marques - 178610
-## João Victor da Conceição Munhoz -160174
+   João Victor da Conceição Munhoz -160174
 
 Funcionamento do Jogo Pong-Solo
 
