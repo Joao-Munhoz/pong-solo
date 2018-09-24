@@ -24,17 +24,17 @@ uint64_t get_now_ms() {
 int main ()
 {
 	//Barra
-	int position = (int)(SCREEN_WIDTH/2) - SIZE_BARRA;
+	int position = (int)(SCREEN_WIDTH/2) - HALF_BAR;
 	int inst_pos;
 
 	ListaDeParticulas *barra = new ListaDeParticulas();
-	for (int i = -(SIZE_BARRA); i <= SIZE_BARRA; ++i){
+	for (int i = -(HALF_BAR); i <= HALF_BAR; ++i){
 		barra->add_particula(new particulaBarra(position));
 		position++;
 	}
 
 	//Bola e deslocamento
-  Bola *bola = new Bola(12 , 12, (int)(SCREEN_HEIGHT/2), (int)(SCREEN_WIDTH/2));
+  Bola *bola = new Bola(INI_VELOCITY , INI_VELOCITY, (int)(SCREEN_HEIGHT/2), (int)(SCREEN_WIDTH/2));
   Fisica *f = new Fisica(bola);
 
   //Tela
@@ -76,6 +76,7 @@ int main ()
     deltaT = t1-t0;
 
     // Atualiza modelo
+    f->choque(bola, barra);
     f->update(deltaT);
 
     // Atualiza tela
@@ -96,9 +97,8 @@ int main ()
 
     if(c == 'd'){
       player->play(asample_beep2);
-      f->choque(5);
       asample_beep2->set_position(0);
-      if((*(barra->get_particulas()))[0]->get_posicao() + 2*SIZE_BARRA < SCREEN_WIDTH - 2){ 
+      if((*(barra->get_particulas()))[0]->get_posicao() + 2*HALF_BAR < SCREEN_WIDTH - 2){ 
       	for (int i = 0; i < (barra->get_particulas())->size(); ++i){
       		inst_pos = (*(barra->get_particulas()))[i]->get_posicao() + 1;
      			(*(barra->get_particulas()))[i]->update(inst_pos);	

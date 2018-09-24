@@ -4,9 +4,10 @@
 
 #include <thread>
 
-#define SCREEN_WIDTH 70
+#define SCREEN_WIDTH  70
 #define SCREEN_HEIGHT 20
-#define SIZE_BARRA 5
+#define HALF_BAR      5
+#define INI_VELOCITY  5
 
 class Bola {
   private:
@@ -22,6 +23,7 @@ class Bola {
     float get_velocidadeY();
     float get_posicaoX();
     float get_posicaoY();
+    void set_choque(int new_velX);
 };
 
 class particulaBarra {
@@ -56,6 +58,7 @@ class Fisica {
     void choque(float velocidade);
     void update(float deltaT);
     int get_posicao();
+    void choque(Bola *bola, ListaDeParticulas *barra);
 };
 
 class Tela {

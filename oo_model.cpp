@@ -37,6 +37,10 @@ float Bola::get_posicaoY() {
   return this->posicaoY;
 }
 
+void Bola::set_choque(int new_velX){
+	this->velocidadeX = new_velX;
+}
+
 particulaBarra::particulaBarra(int posicao) {
   this->posicao = posicao;
   this->iconeBarra = '_';
@@ -85,7 +89,7 @@ void Fisica::update(float deltaT) {
   	new_velY = (-1)*updateBola->get_velocidadeY();
   }
 
-  if(updateBola->get_posicaoX() > SCREEN_HEIGHT || updateBola->get_posicaoX() < 2){
+  if(updateBola->get_posicaoX() < 2){
   	new_velX = (-1)*updateBola->get_velocidadeX();
   }
 
@@ -95,7 +99,14 @@ void Fisica::update(float deltaT) {
   updateBola->update(new_posX, new_posY, new_velX, new_velY);
 }
 
-void Fisica::choque(float velocidade) {
+void Fisica::choque(Bola *bola, ListaDeParticulas *barra) {
   // Atualiza parametros dos corpos!
+	if(bola->get_posicaoX() < SCREEN_HEIGHT - 1) return;
+	if(bola->get_posicaoY() > (*(barra->get_particulas()))[0]->get_posicao()
+		&& bola->get_posicaoY() < (*(barra->get_particulas()))[2*HALF_BAR - 1]->get_posicao()
+		){
+		int new_velX = bola->get_velocidadeX();
+		bola->set_choque(-new_velX);
+	}
   
 }
