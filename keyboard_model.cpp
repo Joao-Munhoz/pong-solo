@@ -7,7 +7,7 @@
 #include "oo_model.hpp"
 
 using namespace std::chrono;
-
+	  
 /*
 class Teclado {
   private:

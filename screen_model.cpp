@@ -15,7 +15,8 @@ Tela::Tela(Bola *bola, ListaDeParticulas *barra, int maxI, int maxJ, float maxX,
                                 bola->get_posicaoX(),\
                                 bola->get_posicaoY());
   this->atualBarra = barra;
-  this->anteriorBarra = barra;
+  this->anteriorBarra = new ListaDeParticulas();
+  this->anteriorBarra->hard_copy(this->atualBarra);
   this->maxI = maxI;
   this->maxJ = maxJ;
   this->maxX = maxX;
@@ -47,6 +48,10 @@ void Tela::update() {
     int i, j;
 
     //Apaga a barra na tela
+     for (int i = 0; i < (*(anteriorBarra->get_particulas())).size(); ++i){
+    	move( SCREEN_HEIGHT - 1 , (*(anteriorBarra->get_particulas()))[i]->get_posicao());
+    	echochar(' ');
+    }
 
     //Apaga bola da tela
     i = (int) anteriorBola->get_posicaoX() * \
@@ -63,6 +68,8 @@ void Tela::update() {
     for (int i = 0; i < (*(atualBarra->get_particulas())).size(); ++i){
     	move( SCREEN_HEIGHT - 1 , (*(atualBarra->get_particulas()))[i]->get_posicao());
     	echochar('_');
+
+    	(*(anteriorBarra->get_particulas()))[i]->update((*(atualBarra->get_particulas()))[i]->get_posicao());
     }
   
     // Desenha bola na tela
